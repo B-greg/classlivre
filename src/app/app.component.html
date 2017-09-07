@@ -1,12 +1,28 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    {{title}}!
-  </h1>
-</div>
-<nav>
-<a routerLink="/user" routerLinkActive="active">User</a>
-<a routerLink="/list" routerLinkActive="active">List</a>
-</nav>
-<router-outlet></router-outlet>
+<md-toolbar color="primary">
+
+    <button type="button" md-button (click)="sidenav.toggle()">
+        Menu
+      </button>
+
+  <span>{{title}}</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+</md-toolbar>
+
+
+<md-sidenav-container>
+    <md-sidenav #sidenav  class="sidenav col-12 col-xs-8 col-sm-6 col-md-4 col-lg-3" mode="over">
+          <md-nav-list>
+              <a md-list-item routerLink="/user" routerLinkActive="active">User</a>
+              <a md-list-item routerLink="/list" routerLinkActive="active">List</a>
+           </md-nav-list>
+    </md-sidenav>
+
+    <div class="my-content">
+
+        <router-outlet></router-outlet>
+        
+    </div>
+  </md-sidenav-container>
 
