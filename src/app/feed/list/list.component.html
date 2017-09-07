@@ -1,3 +1,7 @@
-<div  *ngFor="let image of images" >
-  <img src='{{image}}'/>
+<div class="row">
+  <div class="col-12">
+    <div class="row" *ngFor="let image of images">
+      <img class="col-12" src='{{image}}' />
+    </div>
+  </div>
 </div>

@@ -2,6 +2,7 @@
 import { Injectable } from "@angular/core";
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { StorageFacebook } from '../../helper/storage.facebook'
 
 import 'rxjs/add/operator/toPromise';
 // Observable class extensions
@@ -23,9 +24,9 @@ import 'rxjs';
 @Injectable()
 export class ListService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private storageFacebook: StorageFacebook) { }
   getData(): Promise<Array<String>> {
-    return this.http.get('https://graph.facebook.com/v2.10/cupemag/albums?access_token=' + localStorage.getItem('facebook'))
+    return this.http.get('https://graph.facebook.com/v2.10/cupemag/albums?access_token=' + this.storageFacebook.getToken() )
       .concatMap(this.extractDataGroup.bind(this))
       .mergeMap(this.extractDataAlbum.bind(this))
       .toArray() 
@@ -40,7 +41,7 @@ export class ListService {
 
 
   private extractDataAlbum(element: any) {
-    return this.http.get('https://graph.facebook.com/v2.10/' + element.id + '/photos?fields=images&access_token=' +  localStorage.getItem('facebook'))
+    return this.http.get('https://graph.facebook.com/v2.10/' + element.id + '/photos?fields=images&access_token=' +  this.storageFacebook.getToken())
       .concatMap(res => {
         return res.json().data
       })

@@ -4,13 +4,16 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RouterModule, Routes }   from '@angular/router';
 import { AppComponent } from './app.component';
 import { ListComponent } from './feed/list/list.component';
-import { LoginComponent } from './login/login.component';
+import { UserComponent } from './login/user/user.component';
 import { HttpModule }    from '@angular/http';
 import { Angular2SocialLoginModule } from "angular2-social-login";
+import { LoginDialogComponent } from './login/login-dialog/login-dialog.component';
+import { MaterialModule } from '@angular/material';
+import { StorageFacebook } from './helper/storage.facebook'  
 
 const appRoutes: Routes = [
   { path: 'list', component: ListComponent },
-  { path: 'login',        component: LoginComponent }
+  { path: 'user', component: UserComponent }
 ];
 
 let providers = {
@@ -24,16 +27,22 @@ let providers = {
   declarations: [
     AppComponent,
     ListComponent,
-    LoginComponent
+    UserComponent,
+    LoginDialogComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    Angular2SocialLoginModule
+    MaterialModule,
+    Angular2SocialLoginModule,
+    
   ],
-  providers: [],
+  providers: [ 
+    StorageFacebook
+   ],
+  entryComponents: [ LoginDialogComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
