@@ -9,9 +9,10 @@ import { HttpModule }    from '@angular/http';
 import { Angular2SocialLoginModule } from "angular2-social-login";
 import { LoginDialogComponent } from './login/login-dialog/login-dialog.component';
 import { MaterialModule } from '@angular/material';
-import { StorageFacebook } from './helper/storage.facebook'  
+import { StorageFacebook } from '../controller/storage.facebook'  
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: '/list', pathMatch: 'full' },
   { path: 'list', component: ListComponent },
   { path: 'user', component: UserComponent }
 ];

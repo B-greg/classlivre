@@ -1,0 +1,38 @@
+<div class="page">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div class="container">
+
+
+        <div class="card">
+
+          <!--Card content-->
+          <div class="card-body">
+            <!--Title-->
+            <h4 class="card-title">User profile</h4>
+
+            <div class="center profile">
+              <!--Card image-->
+              <img class="profile_image img-fluid" src='{{ user.image }}' alt="Card image">
+              <div class="profile_text_left">
+                <span class="profile_text card-text"> {{ user.name }} </span>
+                <span class="profile_text  card-text">{{ user.email }}</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <button md-raised-button color="primary" (click)="renewToken()">Renew token</button>
+        <button md-raised-button color="accent" (click)="logout()">Logout</button>
+
+      </div>
+
+
+    </div>
+  </div>
+  <div class="col-1"></div>
+
+</div>
