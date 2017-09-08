@@ -32,8 +32,6 @@ export class LoginDialogComponent implements OnInit {
   closeSelf() {
     console.log("close");
     this.dialogRef.close("value");
-    this.dialogRef.close("value");
-    this.dialogRef.close("value");
   }
 
 }

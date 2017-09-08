@@ -56,9 +56,9 @@ export class AlbumComponent implements OnInit {
 
   private updateColRow() {
     const element = window.innerWidth;
-    if (element < 950) { this.colRow = 2; }
-    else if (element > 950) { this.colRow = 3; }
-    else if (element < 750) { this.colRow = 1; }
+    if (element < 750) { this.colRow = 1; }
+    else if (element < 950) { this.colRow = 2; }
+    else if (element < 1400) { this.colRow = 3; }
     else { this.colRow = 4 }
   }
 

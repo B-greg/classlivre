@@ -10,24 +10,10 @@ div.centerpanel {
   width: 100%;
   height: 100%;
 }
-div.card{
+
+md-card.card {
   margin-top: 24px;
   margin-bottom: 24px;
-}
-
-.profile{
-  margin-bottom: 24px;
-}
-
-.profile_text {
-  display: block;
-}
-
-.profile_image {
-  vertical-align: middle;
-  display: inline-block;
-  height: 88px;
-  width: 88px;
 }
 
 .center {

@@ -10,7 +10,8 @@ import { Angular2SocialLoginModule } from "angular2-social-login";
 import { LoginDialogComponent } from './login/login-dialog/login-dialog.component';
 import { MaterialModule } from '@angular/material';
 import { StorageFacebook } from '../controller/storage.facebook';
-import { AlbumComponent } from './feed/album/album.component'  
+import { AlbumComponent } from './feed/album/album.component';
+import { AlbumAdapterComponent } from './feed/album/album-adapter/album-adapter.component'  
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/albums/cupemag', pathMatch: 'full' },
@@ -31,7 +32,8 @@ let providers = {
     ListComponent,
     UserComponent,
     LoginDialogComponent,
-    AlbumComponent
+    AlbumComponent,
+    AlbumAdapterComponent
   ],
   imports: [
     BrowserModule,
