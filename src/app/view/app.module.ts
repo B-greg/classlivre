@@ -9,11 +9,12 @@ import { HttpModule }    from '@angular/http';
 import { Angular2SocialLoginModule } from "angular2-social-login";
 import { LoginDialogComponent } from './login/login-dialog/login-dialog.component';
 import { MaterialModule } from '@angular/material';
-import { StorageFacebook } from '../controller/storage.facebook'  
+import { StorageFacebook } from '../controller/storage.facebook';
+import { AlbumComponent } from './feed/album/album.component'  
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/list', pathMatch: 'full' },
-  { path: 'list', component: ListComponent },
+  { path: '', redirectTo: '/albums/cupemag', pathMatch: 'full' },
+  { path: 'albums/:id', component: AlbumComponent},
   { path: 'user', component: UserComponent }
 ];
 
@@ -29,7 +30,8 @@ let providers = {
     AppComponent,
     ListComponent,
     UserComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    AlbumComponent
   ],
   imports: [
     BrowserModule,
