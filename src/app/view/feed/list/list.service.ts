@@ -27,33 +27,6 @@ import 'rxjs';
 export class ListService {
 
   constructor(private http: Http, private storageFacebook: StorageFacebook) { }
-  getData(): Promise<Array<String>> {
-    return this.http.get('https://graph.facebook.com/v2.10/cupemag/albums?access_token=' + this.storageFacebook.getUser().token )
-      .concatMap(this.extractDataGroup.bind(this))
-      .mergeMap(this.extractDataAlbum.bind(this))
-      .take(4)
-      .toArray() 
-      .catch(this.handleError)
-      .toPromise()
-      ;
-  }
-
-  private extractDataGroup(res: Response) {
-    return res.json().data
-  }
-
-
-  private extractDataAlbum(element: any) {
-    return this.http.get('https://graph.facebook.com/v2.10/' + element.id + '/photos?fields=images&access_token=' +  this.storageFacebook.getUser().token)
-      .concatMap(res => {
-        return res.json().data
-      })
-      .map(this.extractImages.bind(this))
-  }
-
-  private extractImages(element: any) {
-    return element.images[0].source
-  }
 
 
 
@@ -65,4 +38,53 @@ export class ListService {
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
   }
+
+  getData(album): Promise<Array<String>> {
+    return this.http.get('https://graph.facebook.com/v2.10/' + album + '/photos?fields=images&access_token=' + this.storageFacebook.getUser().token)
+      .concatMap(res => {
+        return res.json().data
+      })
+      .map(this.extractImages.bind(this))
+      .toArray()
+      .catch(this.handleError)
+      .toPromise();
+  }
+
+
+  private extractImages(element: any) {
+    return element.images[0].source
+  }
+
+  // constructor(private http: Http, private storageFacebook: StorageFacebook) { }
+  // getData(): Promise<Array<String>> {
+  //   return this.http.get('https://graph.facebook.com/v2.10/cupemag/albums?access_token=' + this.storageFacebook.getUser().token )
+  //     .concatMap(this.extractDataGroup.bind(this))
+  //     .mergeMap(this.extractDataAlbum.bind(this))
+  //     .take(4)
+  //     .toArray() 
+  //     .catch(this.handleError)
+  //     .toPromise()
+  //     ;
+  // }
+
+  // private extractDataGroup(res: Response) {
+  //   return res.json().data
+  // }
+
+
+  // private extractDataAlbum(element: any) {
+  //   return this.http.get('https://graph.facebook.com/v2.10/' + element.id + '/photos?fields=images&access_token=' +  this.storageFacebook.getUser().token)
+  //     .concatMap(res => {
+  //       return res.json().data
+  //     })
+  //     .map(this.extractImages.bind(this))
+  // }
+
+  // private extractImages(element: any) {
+  //   return element.images[0].source
+  // }
+
+
+
+
 }

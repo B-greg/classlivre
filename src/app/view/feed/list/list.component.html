@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <div class="row" *ngFor="let image of images">
-        <img class="col-12" src='{{image}}' />
+        <app-image-adapter [modelImage]='image'></app-image-adapter>
       </div>
     </div>
   </div>

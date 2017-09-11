@@ -4,6 +4,7 @@ import { MdDialogModule, MdDialogRef, MdDialog } from '@angular/material';
 import { LoginDialogComponent } from '../../login/login-dialog/login-dialog.component';
 import { StorageFacebook } from '../../../controller/storage.facebook'
 import { ModelFacebook } from '../../../model/model.facebook'
+import { Router, ActivatedRoute, Params, Data } from '@angular/router';
 
 
 @Component({
@@ -19,21 +20,18 @@ export class ListComponent implements OnInit {
 
   images: Array<String>
 
-  constructor(private ListService: ListService, public dialog: MdDialog, private storageFacebook: StorageFacebook) {
+  constructor(private ListService: ListService, public dialog: MdDialog, private storageFacebook: StorageFacebook, private route: ActivatedRoute, private router: Router) {
 
   }
 
 
   ngOnInit() {
-    if (this.storageFacebook.getUser() == null) {
-      console.log("display dialog")
-      let dialogRef = this.dialog.open(LoginDialogComponent, this.config).afterClosed().subscribe(result => {
-        this.ListService.getData().then(element => { this.images = element })
-      });
 
-    } else {
-      this.ListService.getData().then(element => { this.images = element })
-    }
+    this.route.params.subscribe(params => {this.loadData(params)});
+  }
+
+  private loadData(params){
+    this.ListService.getData(params['id']).then(element => { this.images = element })
   }
 
 } 

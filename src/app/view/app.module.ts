@@ -11,11 +11,13 @@ import { LoginDialogComponent } from './login/login-dialog/login-dialog.componen
 import { MaterialModule } from '@angular/material';
 import { StorageFacebook } from '../controller/storage.facebook';
 import { AlbumComponent } from './feed/album/album.component';
-import { AlbumAdapterComponent } from './feed/album/album-adapter/album-adapter.component'  
+import { AlbumAdapterComponent } from './feed/album/album-adapter/album-adapter.component';
+import { ImageAdapterComponent } from './feed/list/image-adapter/image-adapter.component'  
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/albums/cupemag', pathMatch: 'full' },
   { path: 'albums/:id', component: AlbumComponent},
+  { path: 'pictures/:id', component: ListComponent},
   { path: 'user', component: UserComponent }
 ];
 
@@ -33,7 +35,8 @@ let providers = {
     UserComponent,
     LoginDialogComponent,
     AlbumComponent,
-    AlbumAdapterComponent
+    AlbumAdapterComponent,
+    ImageAdapterComponent
   ],
   imports: [
     BrowserModule,

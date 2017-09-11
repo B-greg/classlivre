@@ -29,8 +29,6 @@ export class AlbumComponent implements OnInit {
   ngOnInit() {
     this.onResize()
     this.route.params.subscribe(params => {this.loadData(params)});
-
-
   }
 
 
