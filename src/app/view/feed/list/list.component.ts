@@ -18,7 +18,7 @@ export class ListComponent implements OnInit {
   config = {
   };
 
-  images: Array<String>
+  images: Array<String> = []
 
   constructor(private ListService: ListService, public dialog: MdDialog, private storageFacebook: StorageFacebook, private route: ActivatedRoute, private router: Router) {
 
@@ -27,11 +27,20 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.params.subscribe(params => {this.loadData(params)});
+    this.route.params.subscribe(params => {
+      this.ListService.clear();
+      this.images = [];
+      this.loadData(params);
+    });
   }
 
   private loadData(params){
-    this.ListService.getData(params['id']).then(element => { this.images = element })
+    this.ListService.getData(params['id']).then(element => { this.images.push(...element) })
+  }
+
+
+  onScroll() {
+    this.loadData('')
   }
 
 } 

@@ -27,20 +27,39 @@ import 'rxjs';
 @Injectable()
 export class AlbumService {
 
+  next = null;
+  paging = true;
+
+
   constructor(private http: Http, private storageFacebook: StorageFacebook) { }
   getData(albumName: string): Promise<Array<ModelAlbum>> {
-    return this.http.get('https://graph.facebook.com/v2.10/'+ albumName + '/albums?access_token=' + this.storageFacebook.getUser().token )
+    var url;
+    if (this.paging && this.next == null) {
+      url = 'https://graph.facebook.com/v2.10/' + albumName + '/albums?access_token=' + this.storageFacebook.getUser().token
+    } else if (this.paging && this.next != null) {
+      url = this.next;
+    } else {
+      return
+    }
+    return this.http.get(url)
       .map(this.extractDataGroup.bind(this))
       .catch(this.handleError)
       .toPromise();
   }
 
+  clear() {
+    this.next = null;
+    this.paging = true;
+  }
+
   private extractDataGroup(res: Response) {
     var albums: Array<ModelAlbum> = []
+    this.next = res.json().paging.next;
+    if (res.json().paging.next == undefined) { this.paging = false }
     res.json().data.forEach(element => {
-     albums.push(element) 
+      albums.push(element)
     });
-    
+
     return albums
   }
 

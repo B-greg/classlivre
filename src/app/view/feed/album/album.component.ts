@@ -7,6 +7,7 @@ import { ModelFacebook } from '../../../model/model.facebook'
 import { ModelAlbum } from '../../../model/model.album'
 import { Router, ActivatedRoute, Params, Data } from '@angular/router';
 
+
 @Component({
   selector: 'app-album',
   templateUrl: './album.component.html',
@@ -19,7 +20,7 @@ export class AlbumComponent implements OnInit {
   config = {
   };
 
-  albums: Array<ModelAlbum>
+  albums: Array<ModelAlbum> = []
   colRow: any
 
   constructor(private albumService: AlbumService, public dialog: MdDialog, private storageFacebook: StorageFacebook, private ngZone: NgZone, private route: ActivatedRoute, private router: Router) {
@@ -28,18 +29,22 @@ export class AlbumComponent implements OnInit {
 
   ngOnInit() {
     this.onResize()
-    this.route.params.subscribe(params => {this.loadData(params)});
+    this.route.params.subscribe(params => {
+      this.albums = []
+      this.albumService.clear();
+      this.loadData(params);
+    });
   }
 
 
-  private loadData(params){
+  private loadData(params) {
     if (this.storageFacebook.getUser() == null) {
       let dialogRef = this.dialog.open(LoginDialogComponent, this.config).afterClosed().subscribe(result => {
-        this.albumService.getData(params['id']).then(element => { this.albums = element })
+        this.albumService.getData(params['id']).then(element => { this.albums.push(...element) })
       });
 
     } else {
-      this.albumService.getData(params['id']).then(element => { this.albums = element })
+      this.albumService.getData(params['id']).then(element => { this.albums.push(...element) })
     }
   }
 
@@ -60,4 +65,7 @@ export class AlbumComponent implements OnInit {
     else { this.colRow = 4 }
   }
 
+  onScroll() {
+    this.loadData('')
+  }
 }

@@ -12,7 +12,9 @@ import { MaterialModule } from '@angular/material';
 import { StorageFacebook } from '../controller/storage.facebook';
 import { AlbumComponent } from './feed/album/album.component';
 import { AlbumAdapterComponent } from './feed/album/album-adapter/album-adapter.component';
-import { ImageAdapterComponent } from './feed/list/image-adapter/image-adapter.component'  
+import { ImageAdapterComponent } from './feed/list/image-adapter/image-adapter.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/albums/cupemag', pathMatch: 'full' },
@@ -45,6 +47,7 @@ let providers = {
     RouterModule.forRoot(appRoutes),
     MaterialModule,
     Angular2SocialLoginModule,
+    InfiniteScrollModule
     
   ],
   providers: [ 
@@ -56,3 +59,4 @@ let providers = {
 export class AppModule { }
 
 Angular2SocialLoginModule.loadProvidersScripts(providers);
+platformBrowserDynamic().bootstrapModule(AppModule);

@@ -1,10 +1,18 @@
 <div class="page">
 
+  <div class="search-results"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="300"
+  (scrolled)="onScroll()">
 
   <md-grid-list cols='{{colRow}}' rowHeight="280px">
     <md-grid-tile *ngFor="let album of albums">
       <app-album-adapter [modelAlbum]='album'></app-album-adapter>
     </md-grid-tile>
   </md-grid-list>
+
+</div>
+
 
 </div>
