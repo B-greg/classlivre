@@ -30,10 +30,14 @@ export class AlbumComponent implements OnInit {
   ngOnInit() {
     this.onResize()
     this.route.params.subscribe(params => {
-      this.albums = []
-      this.albumService.clear();
-      this.loadData(params);
+       this.albums = []
+       this.albumService.clear();
+       this.loadData(params);
     });
+
+    // this.albums = []
+    // this.albumService.clear();
+    // this.loadData(this.route.snapshot.params);
   }
 
 

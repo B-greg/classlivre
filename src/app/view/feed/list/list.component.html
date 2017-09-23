@@ -1,12 +1,14 @@
 <div class="page">
   <div class="row">
-    <div class="col-12">
+    <div class="col-1"></div>
+    <div class="col-10">
       <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300"
         (scrolled)="onScroll()">
         <div class="row" *ngFor="let image of images">
-          <app-image-adapter [modelImage]='image'></app-image-adapter>
+          <app-image-adapter class="center" [modelImage]='image'></app-image-adapter>
         </div>
       </div>
     </div>
+    <div class="col-1"></div>
   </div>
 </div>
